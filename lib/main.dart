@@ -33,14 +33,17 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        centerTitle: true,
-        elevation: 10,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(50.0),
+        child: AppBar(
+          title: Text(widget.title),
+          centerTitle: true,
+          elevation: 10.0,
+        ),
       ),
       body: Center(
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.all(20.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -49,14 +52,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: Theme.of(context).textTheme.headline4,
               ),
               SizedBox(
-                height: 100,
+                height: 100.0,
               ),
               Text(
                 '$_counter',
                 style: Theme.of(context).textTheme.headline3,
               ),
               SizedBox(
-                height: 120,
+                height: 120.0,
               ),
               Text(
                 'Note: Please keep the Bluetooth swithced on to assure your safety.',
