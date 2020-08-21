@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'bluemon.dart';
+
+BlueMan blueMan = BlueMan();
 
 void main() {
   runApp(MyApp());
@@ -29,6 +32,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+
+  void _incrementCounter() {
+    blueMan.blueCheck();
+    setState(() {
+      _counter++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +78,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Scan',
+        child: Icon(Icons.replay),
       ),
     );
   }
