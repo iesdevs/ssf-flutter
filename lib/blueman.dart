@@ -5,11 +5,11 @@ import 'package:android_intent/android_intent.dart';
 class BlueMan {
   FlutterBlue flutterBlue = FlutterBlue.instance;
 
-  Future<void> blueCheck() async {
+  Future<String> blueCheck() async {
     final btState =
         await flutterBlue.state.handleError((e) => BluetoothState.unavailable);
     if (btState == BluetoothState.unavailable) {
-      return;
+      return '';
     }
     if (btState != BluetoothState.on) {
       if (Platform.isAndroid) {
@@ -27,22 +27,27 @@ class BlueMan {
 
       if (await flutterBlue.state != BluetoothState.on) {
         // Switch UI back to "not connected".
-        return;
+        return '';
       }
     } else {
-      blueScan();
+      var names = blueScan();
+      return names;
     }
   }
 
-  void blueScan() {
+  String blueScan() {
+    var ns = '';
     var subscription = flutterBlue.scanResults.listen((results) {
       // do something with scan results
       for (ScanResult r in results) {
-        print('${r.device.name} found! rssi: ${r.rssi}');
+        ns += '${r.device.name} found! rssi: ${r.rssi}; ';
+        print('$ns');
+        sleep(const Duration(seconds: 1));
       }
     });
 
     print(subscription);
     flutterBlue.stopScan();
+    return ns;
   }
 }

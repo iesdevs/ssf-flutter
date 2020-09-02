@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'bluemon.dart';
+import 'blueman.dart';
 
 BlueMan blueMan = BlueMan();
 
@@ -31,18 +31,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  String _counter;
 
-  void _incrementCounter() {
-    blueMan.blueCheck();
+  void _incrementCounter() async {
+    _counter = await blueMan.blueCheck();
     setState(() {
-      _counter++;
+      _counter += ' :end';
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(50.0),
         child: AppBar(
@@ -51,31 +52,33 @@ class _MyHomePageState extends State<MyHomePage> {
           elevation: 10.0,
         ),
       ),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'Safety Level',
-                style: Theme.of(context).textTheme.headline4,
-              ),
-              SizedBox(
-                height: 100.0,
-              ),
-              Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.headline3,
-              ),
-              SizedBox(
-                height: 120.0,
-              ),
-              Text(
-                'Note: Please keep the Bluetooth swithced on to assure your safety.',
-                textAlign: TextAlign.justify,
-              ),
-            ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Safety Level',
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+                SizedBox(
+                  height: 100.0,
+                ),
+                Text(
+                  '$_counter',
+                  style: Theme.of(context).textTheme.headline3,
+                ),
+                SizedBox(
+                  height: 120.0,
+                ),
+                Text(
+                  'Note: Please keep the Bluetooth swithced on to assure your safety.',
+                  textAlign: TextAlign.justify,
+                ),
+              ],
+            ),
           ),
         ),
       ),
